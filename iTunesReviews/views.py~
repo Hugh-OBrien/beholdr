@@ -6,7 +6,7 @@ from django.views.generic import TemplateView
 
 class main(TemplateView):
 
-    template_name= 'itunesreviews/main.html'
+    template_name= 'main.html'
 
     #def get(self, request, *args, **kwargs):
      #   return render('/itunesreviews/main.html')
