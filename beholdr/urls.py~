@@ -17,6 +17,5 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^iTunesReviews/', include('iTunesReviews.urls', namespace ="iTunesReviews")),
     url(r'^admin/', include(admin.site.urls)),
 ]
