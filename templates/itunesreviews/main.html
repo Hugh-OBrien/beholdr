@@ -1,8 +1,51 @@
 <h1> Beholdr </h1>
 
+<script language = "JavaScript">
+  
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+     if (checkboxes[3].value=="Check All") {
+             console.log(1)
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     checkboxes[3].value = "Uncheck All";
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+             console.log(checkboxes[3])
+     checkboxes[3].value = "Check All";
+     }
+ }
+		      
+		      
+</script>
+
+
 <form action="{% url 'iTunesReviews:runReport' %}" method="post">
-{% csrf_token %}
-    <label for="your_name">Enter your iTunes ID: </label>
-    <input id="your_name" type="text" name="id" value="{{ name }}">
-    <input type="submit" value="Go">
-</form>
+  {% csrf_token %}
+  <label for="your_name">Enter your iTunes ID: </label>
+  <input id="your_name" type="text" name="id" value="{{ name }}">
+  <input type="submit" value="Go">
+  
+  <br><br>
+  
+  {% if country_list %}
+ <input type="button" onclick= "checkAll(this)" name = "countryList[]" value = "Uncheck All"> <br> 
+ 
+    {% for con in country_list %}
+    <input type = "checkbox" name= "countryList[]" value={{con}} checked="true">{{con}}
+    <br>
+    {% endfor %}
+    
+    
+    {% else %}
+    <p>country list missing</p>
+    {% endif %}
+  </table>
+</form>  

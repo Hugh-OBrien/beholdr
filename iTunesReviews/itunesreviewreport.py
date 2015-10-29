@@ -54,29 +54,21 @@ class country:
         if lastPageNum > page and recursion == True:
             page += 1        
             self.getReviews(page,True)
-   
-                
-def report(itunesID):
+                   
+def report(itunesID, countryFile):
     """maskes a list of country objects and generates an excel sheet with all the reviews from all itunes stores"""
     failedSearches = []
-    
-    #run through the country list file and generate country objects with the country codes and names
+    countryList = []
+
     try:
         newPath = path.abspath(path.dirname(__file__))
         chdir(newPath)
-    
-    except Exception, e:
-        return str(e)
-    
-    try:
-        countryfile = open("countrylist.csv").readlines()
-        countryList = []
+        
     except:
-        return "can't open countryList, please move to the same folder as the program"
-    
-    
-    for c in countryfile:
-        newCountryObject = country(c[0:2],c[3:-1],[],itunesID)
+        return "can't open cert file, file missing from app folder"
+
+    for c in countryFile:
+        newCountryObject = country(c[0:2],c[3:],[],itunesID)
         countryList.append(newCountryObject)
         
         try:
