@@ -1,8 +1,0 @@
-<h1> Beholdr </h1>
-
-<form action="{% url 'iTunesReviews:runReport' %}" method="post">
-{% csrf_token %}
-    <label for="your_name">Enter your iTunes ID: </label>
-    <input id="your_name" type="text" name="id" value="{{ name }}">
-    <input type="submit" value="Go">
-</form>

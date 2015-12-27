@@ -151,21 +151,20 @@ def report(itunesID, countryFile):
     
 
 def idLookup(name):
-    #looks up the name by the itunes search tool and returns the id
+#looks up the name by the itunes search tool and returns the id
 
     url = "https://itunes.apple.com/search?term=" + name
     resp = requests.get(url)
     resp = json.loads(resp.text)
-    ids = []; 
-    #ids.append(name)   
+    
 
     ##later we can add ways to pick between search results but as a basic input for now we'll take the first only
     try:    
-        ids.append(resp['results'][0]['trackId'])
+        id= resp['results'][0]['trackId']
     except:
-        ids.append("Not Found")
+        id = "Not Found"
         
-    return ids
+    return id
 
     
     

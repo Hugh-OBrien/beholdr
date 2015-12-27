@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}" />
+
+<div>
+  <form name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
+    {% csrf_token %}
+    <input id="name" type="text" name="name" value="{{SearchTerm}}">
+    <input type="submit" value="Go">
+  </form>
+</div>
+<div>
+  {% if results %}
+    {% for r in results %}
+      <p>
+        {{r}}
+      </p>
+    {% endfor %}
+  {% endif %}
+</div>

@@ -52,20 +52,9 @@ def runReport(request):
         return HttpResponse("itunes id error, " +  idnumber +  " not in range")
 
         
-def search(request):
-    try:
-        name = request.POST['name']
-    except:
-        name = ""
+def findID(name):
 
-    template = loader.get_template('itunesreviews/search.html')
-
-    #if there is a search term do the search, otherwise render the empty results page
-    if(name != None and name != ""):
-        context = RequestContext(request, {'results' : itunesreviewreport.idLookup(name), 'SearchTerm':name,})
-        return HttpResponse(template.render(context))
-    else:
-        context = RequestContext(request, {'SearchTerm':name,})
-        return HttpResponse(template.render(context))
+    ID = itunesreviewreport.idLookup(name);
+    return ID
 
 #itunesreviewreport.report(903688996)

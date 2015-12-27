@@ -1,0 +1,73 @@
+hugh@hugh-ThinkPad-S3-S440:~$ cd Dropbox/beholdr/beholdr
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr$ ls
+beholdr  iTunesReviews  iTunesReviews\itunesReviews.xls  main.html  manage.py  Procfile  Procfile~  requirements.txt  requirements.txt~  templates
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr$ cd iTunesReviews
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ ls
+admin.py    countrylist.csv  __init__.pyc           itunesreviewreport.pyc  models.py  tests.py  urls.pyc  views.py~
+cacert.pem  __init__.py      itunesreviewreport.py  migrations              templates  urls.py   views.py  views.pyc
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ python
+Python 2.7.6 (default, Jun 22 2015, 17:58:13) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> itunesreviewreport.py
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'itunesreviewreport' is not defined
+>>> itunesreviewreport.
+  File "<stdin>", line 1
+    itunesreviewreport.
+                      ^
+SyntaxError: invalid syntax
+>>> itunesreviewreport
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'itunesreviewreport' is not defined
+>>> itunesreviewreport.pyc
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'itunesreviewreport' is not defined
+>>> ls
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'ls' is not defined
+>>> import os
+>>> os.getcwd()
+'/home/hugh/Dropbox/beholdr/beholdr/iTunesReviews'
+>>> itunesreviewreport.py
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'itunesreviewreport' is not defined
+>>> models.py
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'models' is not defined
+>>> python models.py
+  File "<stdin>", line 1
+    python models.py
+                ^
+SyntaxError: invalid syntax
+>>> execfile(itunesreviewreport.py)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'itunesreviewreport' is not defined
+>>> execfile(models.py)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'models' is not defined
+>>>   File "<stdin>", line 1  C-c C-c
+KeyboardInterrupt
+>>>   C-c C-c
+KeyboardInterrupt
+>>>   C-c C-c
+KeyboardInterrupt
+>>> quit
+Use quit() or Ctrl-D (i.e. EOF) to exit
+>>> 
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ ls
+admin.py    countrylist.csv  __init__.pyc           itunesreviewreport.pyc  models.py  tests.py  urls.pyc  views.py~
+cacert.pem  __init__.py      itunesreviewreport.py  migrations              templates  urls.py   views.py  views.pyc
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ 
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ ls
+admin.py    countrylist.csv  __init__.pyc           itunesreviewreport.pyc  models.py  tests.py  urls.pyc  views.py~
+cacert.pem  __init__.py      itunesreviewreport.py  migrations              templates  urls.py   views.py  views.pyc
+hugh@hugh-ThinkPad-S3-S440:~/Dropbox/beholdr/beholdr/iTunesReviews$ 

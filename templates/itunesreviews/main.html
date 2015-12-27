@@ -1,7 +1,10 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}" />
+
 <h1> Beholdr </h1>
 
 <script language = "JavaScript">
-  
+
  function checkAll(ele) {
      var checkboxes = document.getElementsByTagName('input');
      if (checkboxes[3].value=="Check All") {
@@ -21,31 +24,49 @@
              console.log(checkboxes[3])
      checkboxes[3].value = "Check All";
      }
+   }
+
+ function validateForm() {
+   var x = document.forms["idForm"]["id"].value;
+   if(x == null || x == ""){
+     document.getElementById("errors").innerHTML = '<div>Missing iTunes ID</div>'
+     return false;
+   }
  }
-		      
-		      
+
 </script>
 
+<div id="wrap">
+  <div id="left">
+    <form name = "idForm" action="{% url 'iTunesReviews:runReport' %}" onsubmit="return validateForm()" method="post">
+      {% csrf_token %}
+      <label for="your_name">Enter your iTunes ID: </label>
+      <input id="your_name" type="number" min="100000000" max="999999999" name="id" value=Ident>
+      <input type="submit" value="Go">
+      <p id="errors"></p>
 
-<form action="{% url 'iTunesReviews:runReport' %}" method="post">
-  {% csrf_token %}
-  <label for="your_name">Enter your iTunes ID: </label>
-  <input id="your_name" type="text" name="id" value="{{ name }}">
-  <input type="submit" value="Go">
-  
-  <br><br>
-  
-  {% if country_list %}
- <input type="button" onclick= "checkAll(this)" name = "countryList[]" value = "Uncheck All"> <br> 
- 
-    {% for con in country_list %}
-    <input type = "checkbox" name= "countryList[]" value={{con}} checked="true">{{con}}
-    <br>
-    {% endfor %}
-    
-    
-    {% else %}
-    <p>country list missing</p>
-    {% endif %}
-  </table>
-</form>  
+      {% if country_list %}
+        <input type="button" onclick= "checkAll(this)" name = "countryList[]" value = "Uncheck All"> <br>
+        <p></p>
+
+        {% for con in country_list %}
+          <input type = "checkbox" name= "countryList[]" value={{con}} checked="true">{{con|slice:"3:"}}
+          <br>
+        {% endfor %}
+
+      {% else %}
+        <p>country list missing</p>
+      {% endif %}
+
+      </table>
+    </form>
+  </div>
+
+  <div id="right">
+    <form name = "idForm" action="{% url 'iTunesReviews:search' %}" method="post">
+      {% csrf_token %}
+      <input id="search" type="submit" value="Search for ID">
+    </form>
+
+  </div>
+</div>
