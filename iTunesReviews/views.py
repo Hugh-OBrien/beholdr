@@ -23,15 +23,24 @@ def main(request,ID = ""):
         chdir(newPath)
         
     except Exception, e:
-        return HttpResponse("can't open countryList, file missing from app folder 1")
+        return HttpResponse("INTERNAL ERROR: countryList not opened, file missing from app folder")
 
     try:
         countryfile = open("countrylist.csv").readlines()
+        #parse countryfile into dictionary {Region:[country1,country2...],...}
+        countryDict = {}
+        for c in countryfile:
+            sp = c.split(',')
+            try:
+                countryDict[sp[2]].append(sp[0]+","+sp[1])
+            except:
+                countryDict[sp[2]] = [sp[0]+","+sp[1]]
+
     except:
         return HttpResponse("can't open countryList, file missing from app folder")
     
     template = loader.get_template('itunesreviews/main.html')
-    context = RequestContext(request, {'country_list' : countryfile, 'Ident':ID,})
+    context = RequestContext(request, {'country_list' : countryDict, 'Ident':ID,})
     return HttpResponse(template.render(context))
      
 def runReport(request):

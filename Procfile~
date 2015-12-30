@@ -1,1 +1,1 @@
-web: gunicorn beholdr_wsgi.py --log-file -
+web: gunicorn beholdr.wsgi --log-file -

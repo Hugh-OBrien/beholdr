@@ -18,7 +18,7 @@ class country:
     #class to hold all the data from one country
     def __init__(self, code, name, reviewList, iTunesID):
         self.code = code
-        self.name = name
+        self.name = name.split('\n')[0]
         self.reviews = reviewList
         self.iTunesID = iTunesID
          
@@ -42,7 +42,10 @@ class country:
         #loop to get the reviews from the xml
         for e in tree:
             if e.tag == st+"entry" and e != tree[12]:
-                self.reviews.append(review(e.find(st+'title').text, e.find(st+'author').find(st+'name').text,e.find(st+'updated').text,e.find(st+'content').text ,e.find('{http://itunes.apple.com/rss}rating').text))
+                self.reviews.append(review(e.find(st+'title').text, 
+                                           e.find(st+'author').find(st+'name').text,
+                                           e.find(st+'updated').text,e.find(st+'content').text ,
+                                           e.find('{http://itunes.apple.com/rss}rating').text))
                 
             if e.tag == st+"link":
                 if e.get('rel') == "last" and e.get("href")!="":
@@ -104,7 +107,6 @@ def report(itunesID, countryFile):
         summaryList.append((con.name,len(con.reviews)))    
         
         if(len(con.reviews) > 0):
-               
             
             if noReviews == True:
                 noReviews = False
@@ -160,11 +162,16 @@ def idLookup(name):
     #ids.append(name)   
 
     ##later we can add ways to pick between search results but as a basic input for now we'll take the first only
-    try:    
-        ids.append(resp['results'][0]['trackId'])
+    try: 
+        for r in resp['results']: 
+            ids.append([r['trackId'],r['kind'], r['trackName'],
+                        r['artworkUrl60']])
     except:
         ids.append("Not Found")
-        
+    
+    if len(ids) == 0 and name != None and name != "":
+        ids.append("No iTunes results!")
+    
     return ids
 
     

@@ -1,155 +1,155 @@
-AE,United_Arab_Emirates
-AG,Antigua_and_Barbuda
-AI,Anguilla
-AL,Albania
-AM,Armenia
-AO,Angola
-AR,Argentina
-AT,Austria
-AU,Australia
-AZ,Azerbaijan
-BB,Barbados
-BE,Belgium
-BF,Burkina_Faso
-BG,Bulgaria
-BH,Bahrain
-BJ,Benin
-BM,Bermuda
-BN,Brunei
-BO,Bolivia
-BR,Brazil
-BS,Bahamas
-BT,Bhutan
-BW,Botswana
-BY,Belarus
-BZ,Belize
-CA,Canada
-CG,Republic_Of_Congo
-CH,Switzerland
-CL,Chile
-CN,China
-CO,Colombia
-CR,Costa_Rica
-CV,Cape_Verde
-CY,Cyprus
-CZ,Czech_Republic
-DE,Germany
-DK,Denmark
-DM,Dominica
-DO,Dominican_Republic
-DZ,Algeria
-EC,Ecuador
-EE,Estonia
-EG,Egypt
-ES,Spain
-FI,Finland
-FJ,Fiji
-FM,Federated_States_Of_Micronesia
-FR,France
-GB,United_Kingdom
-GD,Grenada
-GH,Ghana
-GM,Gambia
-GR,Greece
-GT,Guatemala
-GW,Guinea-Bissau
-GY,Guyana
-HK,Hong Kong
-HN,Honduras
-HR,Croatia
-HU,Hungary
-ID,Indonesia
-IE,Ireland
-IL,Israel
-IN,India
-IS,Iceland
-IT,Italy
-JM,Jamaica
-JO,Jordan
-JP,Japan
-KE,Kenya
-KG,Kyrgyzstan
-KH,Cambodia
-KN,St._Kitts_and_Nevis
-KR,Republic_Of_Korea
-KW,Kuwait
-KY,Cayman_Islands
-KZ,Kazakstan
-LA,Lao_People's_Democratic_Republic
-LB,Lebanon
-LC,St._Lucia
-LK,Sri_Lanka
-LR,Liberia
-LT,Lithuania
-LU,Luxembourg
-LV,Latvia
-MD,Republic_Of_Moldova
-MG,Madagascar
-MK,Macedonia
-ML,Mali
-MN,Mongolia
-MO,Macau
-MR,Mauritania
-MS,Montserrat
-MT,Malta
-MU,Mauritius
-MW,Malawi
-MX,Mexico
-MY,Malaysia
-MZ,Mozambique
-NA,Namibia
-NE,Niger
-NG,Nigeria
-NI,Nicaragua
-NL,Netherlands
-NO,Norway
-NP,Nepal
-NZ,New_Zealand
-OM,Oman
-PA,Panama
-PE,Peru
-PG,Papua_New_Guinea
-PH,Philippines
-PK,Pakistan
-PL,Poland
-PT,Portugal
-PW,Palau
-PY,Paraguay
-QA,Qatar
-RO,Romania
-RU,Russia
-SA,Saudi_Arabia
-SB,Solomon_Islands
-SC,Seychelles
-SE,Sweden
-SG,Singapore
-SI,Slovenia
-SK,Slovakia
-SL,Sierra_Leone
-SN,Senegal
-SR,Suriname
-ST,Sao_Tome_and_Principe
-SV,El_Salvador
-SZ,Swaziland
-TC,Turks_and_Caicos
-TD,Chad
-TH,Thailand
-TJ,Tajikistan
-TM,Turkmenistan
-TN,Tunisia
-TR,Turkey
-TT,Trinidad_and_Tobago
-TW,Taiwan
-TZ,Tanzania
-UA,Ukraine
-UG,Uganda
-US,United_States
-UY,Uruguay
-UZ,Uzbekistan
-VC,St._Vincent_and_The_Grenadines
-VE,Venezuela
-VG,British_Virgin_Islands
-VN,Vietnam
-YE,Yemen
-ZA,South_Africa
-ZW,Zimbabwe
+JP,Japan,Asia
+CG,Republic Of Congo,Africa
+EG,Egypt,Africa
+GH,Ghana,Africa
+MZ,Mozambique,Africa
+NA,Namibia,Africa
+NE,Niger,Africa
+NG,Nigeria,Africa
+UG,Uganda,Africa
+ZA,South Africa,Africa
+ZW,Zimbabwe,Africa
+MG,Madagascar,Africa
+ML,Mali,Africa
+SC,Seychelles,Africa
+SL,Sierra Leone,Africa
+SN,Senegal,Africa
+ST,Sao Tome and Principe,Africa
+SZ,Swaziland,Africa
+TD,Chad,Africa
+TN,Tunisia,Africa
+TZ,Tanzania,Africa
+AZ,Azerbaijan,Asia
+CN,China,Asia
+HK,Hong Kong,Asia
+ID,Indonesia,Asia
+IN,India,Asia
+KH,Cambodia,Asia
+KR,Republic Of Korea,Asia
+NP,Nepal,Asia
+PH,Philippines,Asia
+PK,Pakistan,Asia
+VN,Vietnam,Asia
+LA,Lao People's Democratic Republic,Asia
+MN,Mongolia,Asia
+MO,Macau,Asia
+SG,Singapore,Asia
+TH,Thailand,Asia
+TJ,Tajikistan,Asia
+TM,Turkmenistan,Asia
+TW,Taiwan,Asia
+UZ,Uzbekistan,Asia
+DM,Dominica,Caribbean
+DO,Dominican Republic,Caribbean
+TC,Turks and Caicos,Caribbean
+TT,Trinidad and Tobago,Caribbean
+VC,St. Vincent and The Grenadines,Caribbean
+VG,British Virgin Islands,Caribbean
+BZ,Belize,Central America
+HN,Honduras,Central America
+MX,Mexico,Central America
+NI,Nicaragua,Central America
+PA,Panama,Central America
+SV,El Salvador,Central America
+AT,Austria,Europe
+BE,Belgium,Europe
+CH,Switzerland,Europe
+CY,Cyprus,Europe
+CZ,Czech Republic,Europe
+DE,Germany,Europe
+DK,Denmark,Europe
+EE,Estonia,Europe
+ES,Spain,Europe
+FI,Finland,Europe
+GB,United Kingdom,Europe
+GR,Greece,Europe
+HR,Croatia,Europe
+HU,Hungary,Europe
+IE,Ireland,Europe
+IS,Iceland,Europe
+IT,Italy,Europe
+MT,Malta,Europe
+NL,Netherlands,Europe
+NO,Norway,Europe
+PL,Poland,Europe
+PT,Portugal,Europe
+RO,Romania,Europe
+SE,Sweden,Europe
+SI,Slovenia,Europe
+SK,Slovakia,Europe
+UA,Ukraine,Europe
+FR,France,Europe
+MD,Republic Of Moldova,Europe
+MK,Macedonia,Europe
+RU,Russia,Europe
+TR,Turkey,Europe
+AE,United Arab Emirates,Middle East
+IL,Israel,Middle East
+QA,Qatar,Middle East
+SA,Saudi Arabia,Middle East
+JO,Jordan,Middle East
+YE,Yemen,Middle East
+BM,Bermuda,North America
+CA,Canada,North America
+US,United States,North America
+FJ,Fiji,Ocenaia
+SB,Solomon Islands,Ocenaia
+AR,Argentina,South America
+CL,Chile,South America
+CO,Colombia,South America
+EC,Ecuador,South America
+PE,Peru,South America
+PY,Paraguay,South America
+VE,Venezuela,South America
+SR,Suriname,South America
+UY,Uruguay,South America
+AG,Antigua and Barbuda,Caribbean
+AI,Anguilla,Caribbean
+AL,Albania,Europe
+AM,Armenia,Asia
+AO,Angola,Africa
+AU,Australia,Ocenaia
+BB,Barbados,Caribbean
+BF,Burkina Faso,Africa
+BG,Bulgaria,Europe
+BH,Bahrain,Middle East
+BJ,Benin,Africa
+BN,Brunei,Asia
+BO,Bolivia,South America
+BR,Brazil,South America
+BS,Bahamas,Caribbean
+BT,Bhutan,Asia
+BW,Botswana,Africa
+BY,Belarus,Europe
+CR,Costa Rica,Central America
+CV,Cape Verde,Africa
+DZ,Algeria,Africa
+FM,Federated States Of Micronesia,Ocenaia
+GD,Grenada,Caribbean
+GM,Gambia,Africa
+GT,Guatemala,Central America
+GW,Guinea-Bissau,Africa
+GY,Guyana,South America
+JM,Jamaica,Caribbean
+KE,Kenya,Africa
+KG,Kyrgyzstan,Asia
+KN,St. Kitts and Nevis,Caribbean
+KW,Kuwait,Middle East
+KY,Cayman Islands,Caribbean
+KZ,Kazakhstan,Asia
+LB,Lebanon,Middle East
+LC,St. Lucia,Caribbean
+LK,Sri Lanka,Asia
+LR,Liberia,Africa
+LT,Lithuania,Europe
+LU,Luxembourg,Europe
+LV,Latvia,Europe
+MR,Mauritania,Africa
+MS,Montserrat,Caribbean
+MU,Mauritius,Africa
+MW,Malawi,Africa
+MY,Malaysia,Asia
+NZ,New Zealand,Ocenaia
+OM,Oman,Middle East
+PG,Papua New Guinea,Ocenaia
+PW,Palau,Ocenaia

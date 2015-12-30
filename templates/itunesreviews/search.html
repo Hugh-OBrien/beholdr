@@ -1,19 +1,52 @@
+<h1> Beholdr </h1>
+
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}" />
+<div id="wrap">
+  <div id="left">
+    <div>
+      <form name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
+        {% csrf_token %}
+        <div id="search">
+          <label for="your_name">Search for name </label>
+          <input id="searchBox" type="text" name="name" value="{{SearchTerm}}">
+          <input id="searchButton" type="submit" value="Go">
+        </div>
+      </form>
+    </div>
+    <div>
+      {% if results %}
+          <table>
+            {% for r in results %}
+              <form name = "results" action="{% url 'iTunesReviews:main' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="ID" value= {{r.0}}>
+                  <tr>
+                    {% for k in r %}
+                      <td>
+                        {%if forloop.counter == 4%}
+                          <img src="{{k}}" onError="this.onerror=null;this.src='';" />
+                        {% elif forloop.counter == 1 %}
+                          <button>
+                            {{k}}
+                          </button>
+                        {% else %}
+                          {{k}}
+                        {% endif %}
+                      </td>
+                    {% endfor %}
+                  </tr>
+              </form>
+            {% endfor %}
+          </table>
+      {% endif %}
+    </div>
+  </div>
 
-<div>
-  <form name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
-    {% csrf_token %}
-    <input id="name" type="text" name="name" value="{{SearchTerm}}">
-    <input type="submit" value="Go">
-  </form>
-</div>
-<div>
-  {% if results %}
-    {% for r in results %}
-      <p>
-        {{r}}
-      </p>
-    {% endfor %}
-  {% endif %}
+  <div id="right">
+    <form name = "idForm" action="{% url 'iTunesReviews:main' %}" method="post">
+      {% csrf_token %}
+      <input id="NavButton" type="submit" value="Back to review finder">
+    </form>
+  </div>
 </div>

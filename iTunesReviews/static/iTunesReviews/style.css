@@ -7,16 +7,32 @@
 }
 
 div #left {
-    width: 40%;
+    width: 70%;
     float: left;
 }
 div #right {
-    margin-left: 15%;
-    height: 200px;
+    margin-left: 30%;
+}
 
+#NavButton{
+  font-size: 150%;
+  font-weight:bold;
 }
 
 #search{
-  font-size: 200%;
+  font-size: 150%;
   font-weight:bold;
+  size:200%;
+}
+#searchBox{
+  font-size:90%;
+  width:50%;
+}
+
+#searchButton{
+  font-size:90%;
+}
+
+* {
+  font-family: sans-serif;
 }
