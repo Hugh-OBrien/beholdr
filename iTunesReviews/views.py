@@ -4,6 +4,8 @@ from django import forms
 from os import path, chdir
 import itunesreviewreport
 import io
+from collections import OrderedDict
+
 
 from django.views.generic import TemplateView
 
@@ -36,11 +38,15 @@ def main(request,ID = ""):
             except:
                 countryDict[sp[2]] = [sp[0]+","+sp[1]]
 
+        #return HttpResponse(sorted(countryDict.items()))
+
+        sortedCountryDict = OrderedDict(sorted(countryDict.items()))
+
     except:
         return HttpResponse("can't open countryList, file missing from app folder")
     
     template = loader.get_template('itunesreviews/main.html')
-    context = RequestContext(request, {'country_list' : countryDict, 'Ident':ID,})
+    context = RequestContext(request, {'country_list' : sortedCountryDict, 'Ident':ID,})
     return HttpResponse(template.render(context))
      
 def runReport(request):

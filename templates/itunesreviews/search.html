@@ -1,22 +1,54 @@
-<h1> Beholdr </h1>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% load bootstrap3 %}
+{% bootstrap_css %}
 {% load staticfiles %}
+{% bootstrap_javascript %}
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}" />
-<div id="wrap">
-  <div id="left">
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="color:black;"><b>Beholdr</b></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="..">iTunes Review Search</a></li>
+          <li class="active"><a href="./">iTunes ID Finder</a></li>
+        </ul>
+
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+
+
+  <div class="container">
     <div>
-      <form name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
+      <form class="form-inline" name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
         {% csrf_token %}
-        <div id="search">
-          <label for="your_name">Search for name </label>
-          <input id="searchBox" type="text" name="name" value="{{SearchTerm}}">
-          <input id="searchButton" type="submit" value="Go">
+        <div class ="row" id="search">
+          <div class="col-md-2"><label for="your_name">Search for name </label></div>
+          <div class="col-md-4"><input id="searchBox" class="form-control" type="text" name="name" value="{{SearchTerm}}"></div>
+          <div class="col-md-2"><input id="searchButton" class="btn btn-default" type="submit" value="Go"></div>
         </div>
       </form>
     </div>
     <div>
       {% if results %}
           <table>
+            <tr>
+              <td>iTunes id</td>
+              <td>Type</td>
+              <td>Artist</td>
+              <td>Track Name</td>
             {% for r in results %}
               <form name = "results" action="{% url 'iTunesReviews:main' %}" method="post">
                 {% csrf_token %}
@@ -24,14 +56,15 @@
                   <tr>
                     {% for k in r %}
                       <td>
-                        {%if forloop.counter == 4%}
+                        {%if forloop.counter == 5%}
                           <img src="{{k}}" onError="this.onerror=null;this.src='';" />
                         {% elif forloop.counter == 1 %}
                           <button>
                             {{k}}
                           </button>
                         {% else %}
-                          {{k}}
+                          {{k|truncatechars:30}}
+
                         {% endif %}
                       </td>
                     {% endfor %}
@@ -43,10 +76,4 @@
     </div>
   </div>
 
-  <div id="right">
-    <form name = "idForm" action="{% url 'iTunesReviews:main' %}" method="post">
-      {% csrf_token %}
-      <input id="NavButton" type="submit" value="Back to review finder">
-    </form>
-  </div>
-</div>
+</body>

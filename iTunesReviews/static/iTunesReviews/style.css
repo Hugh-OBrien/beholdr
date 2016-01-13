@@ -25,14 +25,14 @@ div #right {
   size:200%;
 }
 #searchBox{
-  font-size:90%;
-  width:50%;
+
 }
 
 #searchButton{
-  font-size:90%;
+
 }
 
 * {
   font-family: sans-serif;
 }
+body { padding-top: 70px; }

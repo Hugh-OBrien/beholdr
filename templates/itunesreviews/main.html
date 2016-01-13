@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
 {% bootstrap_javascript %}
 {% block head-javascript %}
+
 <script language = "JavaScript">
 
  function checkAll(ele) {
@@ -30,37 +31,73 @@
 
  function validateForm() {
    var x = document.forms["idForm"]["id"].value;
+   var y = document.forms["idForm"]["countryList[]"];
+   console.log(y[0].checked);
    if(x == null || x == ""){
      document.getElementById("errors").innerHTML = '<div>Missing iTunes ID</div>'
      return false;
    }
+   var countryFound = false;
+   for(var k = 0; k < y.length; k++){
+      if(y[k].checked == true){
+        countryFound = true;
+        break;
+      }
+   }
+   if(countryFound == false){
+     document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">No Countries Selected</div>'
+     return false;
+   }
+   document.getElementById("errors").innerHTML = ''
  }
 
 </script>
 {% endblock %}
-{% block body-content %}
 
-<div id = "left">
-  <h1> Beholdr </h1>
-  <div>
-    <form class="form-signin" name = "idForm" action="{% url 'iTunesReviews:runReport' %}" onsubmit="return validateForm()" method="post">
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="color:black;"><b>Beholdr</b></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="./">iTunes Review Search</a></li>
+          <li><a href="./search">iTunes ID Finder</a></li>
+        </ul>
+
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="form-inline" name = "idForm" action="{% url 'iTunesReviews:runReport' %}" onsubmit="return validateForm()" method="post">
       {% csrf_token %}
-      <div id="search">
-        <label for="your_name">Enter iTunes ID: </label>
-        <input id="searchBox" type="number" min="100000000" max="9999999999" name="id" value="{{Ident}}">
-        <input id="searchButton" class="btn btn-lg btn-default" type="submit" value="Go">
+      <div class="form-group" id="search">
+        <label for="your_name">iTunes ID </label>
+        <input id="searchBox" class="form-control" type="number" min="100000000" max="9999999999" name="id" value="{{Ident}}">
+        <input id="searchButton" class="btn btn-default" type="submit" value="Go">
         <p id="errors"></p>
       </div>
+
       {% if country_list %}
         <p><input type="button" onclick= "checkAll(this)" name = "checkUncheck" value = "Check All"> </p>
-
         <div class="panel-group" id="accordion">
         {% for key, values in country_list.items %}
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">{{key}}</a>
-                </h4>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">
+                  <h4 class="panel-title", style="color:black;">
+                    {{key}}
+                  </h4>
+                </a>
               </div>
               <div id="collapse{{forloop.counter}}" class="panel-collapse collapse">
                 <div class="panel-body">
@@ -76,16 +113,6 @@
         <p>country list missing!</p>
       {% endif %}
 
-      </table>
     </form>
   </div>
-</div>
-
-  <div id="right">
-    <form name = "idNav" action="{% url 'iTunesReviews:search' %}" method="post">
-      {% csrf_token %}
-      <input id="NavButton" type="submit" value="Search for ID">
-    </form>
-
-  </div>
-{% endblock %}
+</body>

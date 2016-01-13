@@ -164,7 +164,7 @@ def idLookup(name):
     ##later we can add ways to pick between search results but as a basic input for now we'll take the first only
     try: 
         for r in resp['results']: 
-            ids.append([r['trackId'],r['kind'], r['trackName'],
+            ids.append([r['trackId'],r['kind'], r['artistName'], r['trackName'],
                         r['artworkUrl60']])
     except:
         ids.append("Not Found")
