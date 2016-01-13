@@ -20,8 +20,8 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="..">iTunes Review Search</a></li>
-          <li class="active"><a href="./">iTunes ID Finder</a></li>
+          <li><a href="..">iTunes Reviews</a></li>
+          <li class="active"><a href="./">iTunes Id Search</a></li>
         </ul>
 
       </div><!--/.nav-collapse -->
@@ -36,14 +36,14 @@
         {% csrf_token %}
         <div class ="row" id="search">
           <div class="col-md-2"><label for="your_name">Search for name </label></div>
-          <div class="col-md-4"><input id="searchBox" class="form-control" type="text" name="name" value="{{SearchTerm}}"></div>
+          <div class="col-md-2"><input id="searchBox" class="form-control" type="text" name="name" value="{{SearchTerm}}"></div>
           <div class="col-md-2"><input id="searchButton" class="btn btn-default" type="submit" value="Go"></div>
         </div>
       </form>
     </div>
     <div>
       {% if results %}
-          <table>
+          <table class = "table table-hover">
             <tr>
               <td>iTunes id</td>
               <td>Type</td>
@@ -59,7 +59,7 @@
                         {%if forloop.counter == 5%}
                           <img src="{{k}}" onError="this.onerror=null;this.src='';" />
                         {% elif forloop.counter == 1 %}
-                          <button>
+                          <button class = "btn btn-default" style="font-size:100%;">
                             {{k}}
                           </button>
                         {% else %}

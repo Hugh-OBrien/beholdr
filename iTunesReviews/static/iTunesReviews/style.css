@@ -36,3 +36,11 @@ div #right {
   font-family: sans-serif;
 }
 body { padding-top: 70px; }
+
+:checked + span {
+  background-color:99CCCC;
+}
+.hiddenCheckBox{
+  width: 1px;
+  visibility: hidden;
+}
