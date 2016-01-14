@@ -5,7 +5,7 @@ from os import path, chdir
 import itunesreviewreport
 import io
 from collections import OrderedDict
-
+from openpyxl import Workbook
 
 from django.views.generic import TemplateView
 
@@ -50,23 +50,68 @@ def main(request,ID = ""):
     return HttpResponse(template.render(context))
      
 def runReport(request):
+    try:
+        idnumber = request.POST['id']
+        countryList = request.POST.getlist('countryList[]')
+        #nextCountry = request.POST['nextCountry'] # should be an int to pass to countryList
     
-    idnumber = request.POST['id']
-    countryList = request.POST.getlist('countryList[]')
 
-    #validate input and get report
-    if(int(idnumber) < 1000000000 and int(idnumber) >= 100000000):
-        
-        report = itunesreviewreport.report(idnumber,countryList)
-        
-        response = HttpResponse(report ,content_type='application/vnd.ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
-    
-        return response
-    else:
-        return HttpResponse("itunes id error, " +  idnumber +  " not in range")
+        #validate input and get report
+        if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):
+            template = loader.get_template('itunesreviews/progress.html')
+            #create the workbook
+            book = Workbook() 
+            #create the summary page
+            summarySheet = book.create_sheet()
+            summarySheet.title = "Summary"    
+            summarySheet.cell(row=1,column=1).value = "Country"
+            summarySheet.cell(row=1,column=2).value = "Reviews"
+            #remove the default sheet
+            book.remove_sheet(book.get_sheet_by_name("Sheet"))
+            
+            report = itunesreviewreport.report(idnumber,countryList,book,summarySheet)
+            
+            response = HttpResponse(report ,content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
+            
+            return(response)
+        else:
+            #pass a list with the next country to do
+            return HttpResponse("itunes id error, " +  idnumber +  " not in range")
+            
+    except:
+        return HttpResponse(request.POST['countryList[]'])
 
-        
+def progress(request):
+
+    try:
+        idnumber = request.POST['id']
+        countryList = request.POST.getlist('countryList[])')
+        #nextCountry = request.POST['nextCountry'] # should be an int to pass to countryList
+    except:
+        return HttpResponse("Internal Error")
+
+    template = loader.get_template('itunesreviews/progress.html')
+
+    #create the workbook
+    book = Workbook() 
+    #create the summary page
+    summarySheet = book.create_sheet()
+    summarySheet.title = "Summary"    
+    summarySheet.cell(row=1,column=1).value = "Country"
+    summarySheet.cell(row=1,column=2).value = "Reviews"
+    #remove the default sheet
+    book.remove_sheet(book.get_sheet_by_name("Sheet"))
+
+    report = itunesreviewreport.report(idnumber,countryList,book,summarySheet)
+
+    response = HttpResponse(report ,content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
+
+    return(report);
+
+    #pass a list with the next country to do
+
 def search(request):
     try:
         name = request.POST['name']

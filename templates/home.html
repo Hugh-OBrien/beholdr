@@ -1,0 +1,69 @@
+{% load staticfiles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
+{% bootstrap_javascript %}
+
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../" style="color:black;"><b>Beholdr</b></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="./iTunesReviews">iTunes Reviews</a></li>
+          <li><a href="../iTunesReviews/searchid">iTunes Id Search</a></li>
+        </ul>
+
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>Beholdr </h1>
+      <p></p>
+      <p>Beholder is a reporting tool for content creators, collecting data from distribution sorces into useful data </p>
+      <p>Please send suggestions for tools <a href="mailto:hugh@beholdr.eu">hugh@beholdr.eu</a></p>
+    </div>
+      <div class="row top-buffer">
+        <div class="col-md-6">
+          <a class="btn btn-default btn-lg btn-block" type="button" style="white-space:normal;" href="../iTunesReviews">
+            <h1 style="vertical-align:top;"><b>iTunes Review Report</b></h1>
+          </a>
+        </div>
+
+        <div class="col-md-6">
+          <p><b>iTunes reviews by country </b></p>
+          <p style="text-align:justify;">iTunes data for all content specific to each country's store, meaning on a given page of iTunes you can only see one country's reviews.
+            This complies a report of all reviews available for a given iTunes Id in a chosen set of countries or regions.</p>
+
+        </div>
+
+      </div>
+
+      <div class="row top-buffer">
+        <div class="col-md-6">
+          <a class="btn btn-default btn-lg btn-block" type="button" style="white-space:normal width:600px;" href="../iTunesReviews/searchid">
+            <h1 style="vertical-align:top;"><b>iTunes Id search</b></h1>
+
+          </a>
+        </div>
+        <div class="col-md-6">
+          <p><b>iTunes unique id search</b></p>
+          <p style="text-align:justify;">Search by name for the unique iTunes ID for anything on the iTunes store</p>
+        </div>
+      </div>
+
+  </div>
+
+</body>

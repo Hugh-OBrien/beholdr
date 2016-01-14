@@ -5,5 +5,5 @@ from iTunesReviews.views import main, runReport, search
 urlpatterns = [
     url(r'^$', main, name='main'),
     url(r'^report$', runReport, name='runReport'),
-    url(r'^search$', search, name = 'search'),
+    url(r'^searchid$', search, name = 'search'),
 ]

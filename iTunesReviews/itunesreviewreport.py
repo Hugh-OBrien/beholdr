@@ -27,7 +27,9 @@ class country:
     #adds review data to country objects
 
         
-        url = "https://itunes.apple.com/" + self.code + "/rss/customerreviews" + "/page=" + str(page) + "/id=" + str(self.iTunesID) +  "/sortBy=mostRecent/xml"
+        url = "https://itunes.apple.com/" + \
+        self.code + "/rss/customerreviews" + "/page=" + str(page) + \
+        "/id=" + str(self.iTunesID) +  "/sortBy=mostRecent/xml"
 
         resp = requests.get(url, verify = "cacert.pem")
         resp = resp.text
@@ -59,7 +61,7 @@ class country:
             page += 1        
             self.getReviews(page,True)
                    
-def report(itunesID, countryFile):
+def report(itunesID, countryFile, book, summarySheet):
     """maskes a list of country objects and generates an excel sheet with all the reviews from all itunes stores"""
     failedSearches = []
     countryList = []
@@ -85,18 +87,10 @@ def report(itunesID, countryFile):
                 failedSearches.append(newCountryObject.name)
             
     
-    book = Workbook() 
+   
     
     outputPath = newPath + "\itunesReviews.xls"
     
-    #create the summary page
-    summarySheet = book.create_sheet()
-    summarySheet.title = "Summary"
-    
-    summarySheet.cell(row=1,column=1).value = "Country"
-    summarySheet.cell(row=1,column=2).value = "Reviews"
-        
-    book.remove_sheet(book.get_sheet_by_name("Sheet"))#remove the default sheet
     workingRow = 2
 
     noReviews = True

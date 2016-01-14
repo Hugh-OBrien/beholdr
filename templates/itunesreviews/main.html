@@ -4,6 +4,7 @@
 {% bootstrap_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
 {% bootstrap_javascript %}
+
 {% block head-javascript %}
 
 <script language = "JavaScript">
@@ -19,8 +20,10 @@
          }
      for(var p = 0; p< others.length; p++){
        others[p].value = "Uncheck All";
+       others[p].style.backgroundColor="99CCCC";
      }
      ele.value = "Uncheck All";
+     ele.style.backgroundColor="99CCCC";
      } else {
          for (var i = 0; i < checkboxes.length; i++) {
              if (checkboxes[i].type == 'checkbox') {
@@ -28,8 +31,10 @@
              }
          }
      checkboxes[3].value = "Check All";
+     ele.style.backgroundColor="white";
      for(var p = 0; p< others.length; p++){
        others[p].value = "Check All";
+       others[p].style.backgroundColor="white";
      }
      }
    }
@@ -95,12 +100,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" style="color:black;"><b>Beholdr</b></a>
+        <a class="navbar-brand" href="../home" style="color:black;"><b>Beholdr</b></a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="./">iTunes Reviews</a></li>
-          <li><a href="./search">iTunes Id Search</a></li>
+          <li><a href="./searchid">iTunes Id Search</a></li>
         </ul>
 
       </div><!--/.nav-collapse -->
