@@ -71,7 +71,7 @@ def progressPage(request):
         if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):        
             #get the next 4 countries
             workingCountryList=[]
-            for x in range(0, 4):
+            for x in range(0, 1):
                 try:
                     workingCountryList.append(countryList[0])
                     countryList.pop(0)
