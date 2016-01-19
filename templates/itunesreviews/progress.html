@@ -1,9 +1,21 @@
+{% block head-javascript %}
 {% load staticfiles %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 {% load bootstrap3 %}
 {% bootstrap_css %}
+
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
 {% bootstrap_javascript %}
+
+<script language = "JavaScript">
+
+  window.onload = function(){
+    document.forms["idForm"].submit();
+  }
+
+</script>
+{% endblock %}
 
 <body>
 
@@ -30,5 +42,31 @@
 
   <div class="container">
 
+    <form class="form-inline" name = "idForm"  action="" method="POST">
+      {% csrf_token %}
+      <div class="well"> <h2> <strong> {{Ident}} </strong> </h2>
+      <input id="searchBox" hidden="true" class="" min="100000000" max="9999999999" name="id" value="{{Ident}}">
+      <input hidden="true" name="seshId" value="{{seshId}}">
+      </div>
+      <p></p>
+      {% if country_list %}
+        {%for c in country_list%}
+          {%if forloop.counter < 5 %}
+            <div class="well" style="background-color:99CCCC;"><p>
+              <input id="{{c}}" type = "checkbox" hidden="true" checked="true" name= "countryList[]" value="{{c}}">
+            {{c|slice:"3:"}}</p></div>
+          {% else %}
+            <div class="well"><p>
+              <input id="{{c}}" type = "checkbox" hidden="true" checked="true" name= "countryList[]" value="{{c}}">
+              {{c|slice:"3:"}}</p></div>
+          {%endif%}
+        {%endfor%}
+      {%else%}
+        <div class="well" style="background-color:99CCCC;">Collection complete, your file should now download</div>
+      {%endif%}
+    </form>
   </div>
+
+
+
 </body>

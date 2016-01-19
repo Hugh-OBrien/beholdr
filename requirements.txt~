@@ -12,4 +12,5 @@ wsgiref==0.1.2
 certifi==2015.4.28
 openpyxl==2.3.0
 whitenoise
+django-bootstrap3
 

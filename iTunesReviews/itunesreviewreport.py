@@ -61,8 +61,9 @@ class country:
             page += 1        
             self.getReviews(page,True)
                    
-def report(itunesID, countryFile, book, summarySheet):
-    """maskes a list of country objects and generates an excel sheet with all the reviews from all itunes stores"""
+def report(itunesID, countryFile, book, summarySheet, summaryWorkingRow):
+    """makes a list of country objects and generates an excel sheet
+    with all the reviews from all itunes stores"""
     failedSearches = []
     countryList = []
 
@@ -78,24 +79,22 @@ def report(itunesID, countryFile, book, summarySheet):
         countryList.append(newCountryObject)
         
         try:
+            #print  >>sys.stderr, "works"
             newCountryObject.getReviews() #while looping through collect review data        
         except Exception, e:
-            print e
-            if str(e) != "no element found: line 1, column 0": #surpressing this error to simply skip these countries instead         
+            if str(e) != "no element found: line 1, column 0": 
+                #surpressing this error to simply skip these countries instead         
                 return str(e) + " - " + newCountryObject.name
             else:
-                failedSearches.append(newCountryObject.name)
-            
-    
-   
+                failedSearches.append(newCountryObject.name)   
     
     outputPath = newPath + "\itunesReviews.xls"
-    
-    workingRow = 2
 
     noReviews = True
     summaryList = []
-    
+
+    workingRow = 2
+
     for con in countryList:
                 
         summaryList.append((con.name,len(con.reviews)))    
@@ -119,32 +118,35 @@ def report(itunesID, countryFile, book, summarySheet):
                 workingSheet.cell(row=revRow,column=2).value = rev.date
                 workingSheet.cell(row=revRow,column=3).value = rev.userName
                 workingSheet.cell(row=revRow,column=4).value = rev.text
-                workingSheet.cell(row=revRow,column=5).value = rev.rating
+                workingSheet.cell(row=revRow,column=5).value = int(rev.rating)
                 
                 revRow += 1
     
         workingRow+=1
     
-    workingRow = 1
-    summaryList.sort(key=lambda tup: tup[1], reverse = True)
+    workingRow = summaryWorkingRow
         
     for k in summaryList: 
         summarySheet.cell(row=workingRow,column=1).value = k[0]
         summarySheet.cell(row=workingRow,column=2).value = k[1]
         workingRow += 1
 
+    summaryList.sort(key=lambda tup: tup[1], reverse = True)
 
+
+    '''
     if noReviews == True:
     
-        return "No reviews found. If you believe this is incorrect please check your iTunes ID"
-    
+        return "No reviews found. If you believe this is incorrect please check \
+        the iTunes id " +itunesID+ "is correct"
+    '''    
     book.save(outputPath) 
-    return save_virtual_workbook(book)
-    
+    return (book)
+    '''
     if len(failedSearches) > 0:
         print failedSearches
-        return "Complete, failed searches from:" + str(failedSearches)
-    
+        return Exception
+    '''
 
 def idLookup(name):
     #looks up the name by the itunes search tool and returns the id
@@ -155,7 +157,8 @@ def idLookup(name):
     ids = []; 
     #ids.append(name)   
 
-    ##later we can add ways to pick between search results but as a basic input for now we'll take the first only
+    ##later we can add ways to pick between search 
+    ##results but as a basic input for now
     try: 
         for r in resp['results']: 
             ids.append([r['trackId'],r['kind'], r['artistName'], r['trackName'],

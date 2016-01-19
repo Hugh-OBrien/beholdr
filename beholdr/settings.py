@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = (
     'iTunesReviews.apps.itunesreviewsConfig',
     'bootstrap3',
+    'dajaxice',
+    'dajax',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

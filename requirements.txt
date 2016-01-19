@@ -13,4 +13,6 @@ certifi==2015.4.28
 openpyxl==2.3.0
 whitenoise
 django-bootstrap3
+django-dajax
+django-dajaxice==0.7
 

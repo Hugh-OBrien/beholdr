@@ -72,6 +72,10 @@
      document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">Missing iTunes ID</div>'
      return false;
    }
+   if(x<100000000 || x > 9999999999 ||isNaN(x)){
+     document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">iTunes ID out of range - 9 or 10 digit number </div>'
+     return false;
+   }
    var countryFound = false;
    for(var k = 0; k < y.length; k++){
       if(y[k].checked == true){
@@ -113,12 +117,12 @@
   </nav>
 
   <div class="container">
-    <form class="form-inline" name = "idForm" action="{% url 'iTunesReviews:runReport' %}" onsubmit="return validateForm()" method="post">
+    <form class="form-inline" name = "idForm" action="{% url 'iTunesReviews:progressPage' %}" onsubmit="return validateForm()" method="post">
       {% csrf_token %}
       <div class="form-group" id="search">
         <label for="your_name">iTunes ID </label>
-        <input id="searchBox" class="form-control" type="number" min="100000000" max="9999999999" name="id" value="{{Ident}}">
-        <input id="searchButton" class="btn btn-default" type="submit" value="Go">
+        <input id="searchBox" class="form-control" min="100000000" max="9999999999" name="id" value="{{Ident}}">
+        <input id="searchButton" class="btn btn-default" type="submit" value="Collect Reviews and Download">
         <p id="errors"></p>
       </div>
 

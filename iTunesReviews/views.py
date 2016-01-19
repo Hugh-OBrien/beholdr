@@ -1,11 +1,17 @@
+import sys
+from .models import ReviewReport
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django import forms
-from os import path, chdir
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from os import path, chdir, remove
 import itunesreviewreport
-import io
+import io, random
 from collections import OrderedDict
 from openpyxl import Workbook
+from openpyxl import load_workbook
+from openpyxl.writer.excel import save_virtual_workbook
 
 from django.views.generic import TemplateView
 
@@ -48,19 +54,102 @@ def main(request,ID = ""):
     template = loader.get_template('itunesreviews/main.html')
     context = RequestContext(request, {'country_list' : sortedCountryDict, 'Ident':ID,})
     return HttpResponse(template.render(context))
-     
-def runReport(request):
-    try:
-        idnumber = request.POST['id']
-        countryList = request.POST.getlist('countryList[]')
-        #nextCountry = request.POST['nextCountry'] # should be an int to pass to countryList
-    
 
-        #validate input and get report
-        if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):
+
+def progressPage(request):
+    idnumber = request.POST['id']
+    countryList = request.POST.getlist('countryList[]')
+    try:
+        seshId = (request.POST['seshId'])
+    #Generate session id
+    except:
+        random.seed()
+        seshId = str(random.randrange(10001, 20000, 1))
+        print >>sys.stderr, seshId
+
+    if(len(countryList) >0):
+        if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):        
+            #get the next 4 countries
+            workingCountryList=[]
+            for x in range(0, 4):
+                try:
+                    workingCountryList.append(countryList[0])
+                    countryList.pop(0)
+                except:
+                    break
+            runReport(idnumber, workingCountryList, seshId)
+
             template = loader.get_template('itunesreviews/progress.html')
+            context = RequestContext(request, {'country_list':countryList, 'Ident':idnumber,
+                                               'seshId':seshId,})
+            return HttpResponse(template.render(context))
+
+    else:
+        #now we're going to returnt he actual report and delete the internal records
+        rep= ReviewReport.objects.get(name=seshId)
+
+        newPath = path.abspath(path.dirname(__file__))
+        chdir(newPath)
+
+        returnBook = load_workbook(rep.book)
+        returnBook = save_virtual_workbook(returnBook)
+
+        #delete the actual file
+        newPath = path.abspath(path.dirname(__file__))
+        chdir(newPath)
+        remove(rep.book)
+
+        #delete database entry
+        rep.delete()
+
+        #return as attachment
+        response = HttpResponse(returnBook ,content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
+        return response
+
+def runReport(idnumber, countryList, sessionId):
+        
+    if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):
+        
+        try:
+            newPath = path.abspath(path.dirname(__file__))
+            chdir(newPath)
+            
+        except Exception, e:
+            return HttpResponse("INTERNAL ERROR: file locations missing")             
+            
+        try:
+            rep = ReviewReport.objects.get(name=sessionId)
+            bookAddress = rep.book
+            try:
+                book = load_workbook(bookAddress)
+                summarySheet = book.get_sheet_by_name("Summary")
+                #print >>sys.stderr, countryList
+
+                book = itunesreviewreport.report(idnumber,countryList,
+                                                 book,summarySheet, rep.counter)
+                rep.counter += len(countryList)
+                rep.save()
+                    
+                book.save(rep.book)
+
+                #print >>sys.stderr, rep.counter 
+
+                return(book)
+            except Exception, e:
+                #print >>sys.stderr, e    
+                rep.delete()
+                return runReport(idnumber, countryList, sessionId);
+        
+        
+        except ObjectDoesNotExist:
+            #print >>sys.stderr, "no exist"
+
+            #create book path database entry. 
+            #Counter set to 2 as the first writeable row on the summary page
+            rep = ReviewReport(name=sessionId, book = '', counter=2) 
             #create the workbook
-            book = Workbook() 
+            book = Workbook()
             #create the summary page
             summarySheet = book.create_sheet()
             summarySheet.title = "Summary"    
@@ -68,50 +157,22 @@ def runReport(request):
             summarySheet.cell(row=1,column=2).value = "Reviews"
             #remove the default sheet
             book.remove_sheet(book.get_sheet_by_name("Sheet"))
+
+            #save the book and the db entry
+            book.save("tempXls/"+sessionId+".xlsx") 
+            rep.book= "tempXls/"+sessionId+".xlsx"
+            rep.save()
+            return runReport(idnumber, countryList, sessionId)
             
-            report = itunesreviewreport.report(idnumber,countryList,book,summarySheet)
+        except MultipleObjectsReturned:
+            rep = ReviewReport.objects.filter(name=sessionId)
+            rep.delete()
+            return runReport(idnumber, countryList, sessionId+'2')
             
-            response = HttpResponse(report ,content_type='application/vnd.ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
+    else:
+        #pass a list with the next country to do
+        return HttpResponse("itunes id error, " +  idnumber +  " not in range")
             
-            return(response)
-        else:
-            #pass a list with the next country to do
-            return HttpResponse("itunes id error, " +  idnumber +  " not in range")
-            
-    except:
-        return HttpResponse(request.POST['countryList[]'])
-
-def progress(request):
-
-    try:
-        idnumber = request.POST['id']
-        countryList = request.POST.getlist('countryList[])')
-        #nextCountry = request.POST['nextCountry'] # should be an int to pass to countryList
-    except:
-        return HttpResponse("Internal Error")
-
-    template = loader.get_template('itunesreviews/progress.html')
-
-    #create the workbook
-    book = Workbook() 
-    #create the summary page
-    summarySheet = book.create_sheet()
-    summarySheet.title = "Summary"    
-    summarySheet.cell(row=1,column=1).value = "Country"
-    summarySheet.cell(row=1,column=2).value = "Reviews"
-    #remove the default sheet
-    book.remove_sheet(book.get_sheet_by_name("Sheet"))
-
-    report = itunesreviewreport.report(idnumber,countryList,book,summarySheet)
-
-    response = HttpResponse(report ,content_type='application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
-
-    return(report);
-
-    #pass a list with the next country to do
-
 def search(request):
     try:
         name = request.POST['name']
