@@ -1,3 +1,3 @@
-web: gunicorn beholdr.wsgi --timeout 60 --log-file -
+web: gunicorn beholdr.wsgi --timeout 120 --log-file -
 
 
