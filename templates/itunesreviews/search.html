@@ -1,9 +1,20 @@
+{% extends "base.html"%}
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 {% load bootstrap3 %}
 {% bootstrap_css %}
 {% load staticfiles %}
 {% bootstrap_javascript %}
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}" />
+
+{%block scripts%}
+<script language = "JavaScript">
+  window.onload = function(){
+    var x = document.getElementById("idfinder");
+    x.className = "active";
+  }
+</script>
+{%endblock%}
 
 <body>
 
@@ -28,14 +39,14 @@
     </div>
   </nav>
 
-
+{% block content %}
 
   <div class="container">
     <div>
       <form class="form-inline" name = "search" action="{% url 'iTunesReviews:search' %}" method="post">
         {% csrf_token %}
         <div class ="row" id="search">
-          <div class="col-md-2"><label for="your_name">Search for name </label></div>
+          <div class="col-md-2"><label for="your_name">Search by name for iTunes id </label></div>
           <div class="col-md-2"><input id="searchBox" class="form-control" type="text" name="name" value="{{SearchTerm}}"></div>
           <div class="col-md-2"><input id="searchButton" class="btn btn-default" type="submit" value="Go"></div>
         </div>
@@ -75,5 +86,5 @@
       {% endif %}
     </div>
   </div>
-
+{%endblock%}
 </body>

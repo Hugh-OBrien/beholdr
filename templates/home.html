@@ -1,3 +1,6 @@
+
+{% extends "base.html"%}
+
 {% load staticfiles %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
 {% load bootstrap3 %}
@@ -5,28 +8,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
 {% bootstrap_javascript %}
 
+
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../" style="color:black;"><b>Beholdr</b></a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="./iTunesReviews/">iTunes Reviews</a></li>
-          <li><a href="../iTunesReviews/searchid">iTunes Id Search</a></li>
-        </ul>
-
-      </div><!--/.nav-collapse -->
-    </div>
-  </nav>
+{%block content%}
 
   <div class="container-fluid">
     <div class="jumbotron">
@@ -43,7 +28,7 @@
         </div>
 
         <div class="col-md-6">
-          <p><b>iTunes reviews by country </b></p>
+          <p><b>iTunes reviews for every country </b></p>
           <p style="text-align:justify;">iTunes separates reviews by country, meaning on a given page of iTunes you can only see one country's reviews.
             This complies a report of all reviews available for a given iTunes Id in a chosen set of countries or regions.</p>
 
@@ -54,7 +39,7 @@
       <div class="row top-buffer">
         <div class="col-md-6">
           <a class="btn btn-default btn-lg btn-block" type="button" style="white-space:normal width:600px;" href="../iTunesReviews/searchid">
-            <h1 style="vertical-align:top;"><b>iTunes id Search</b></h1>
+            <h1 style="vertical-align:top;"><b>iTunes id Finder</b></h1>
 
           </a>
         </div>
@@ -65,5 +50,6 @@
       </div>
 
   </div>
+{%endblock%}
 
 </body>

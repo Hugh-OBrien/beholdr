@@ -1,3 +1,5 @@
+{% extends "base.html"%}
+
 {% load staticfiles %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 {% load bootstrap3 %}
@@ -5,9 +7,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
 {% bootstrap_javascript %}
 
-{% block head-javascript %}
+{% block scripts %}
 
 <script language = "JavaScript">
+  window.onload = function v(){
+    document.getElementById("reviews").className = "active";
+  }
+
 
  function checkAll(ele) {
      var checkboxes = document.getElementsByTagName('input');
@@ -116,11 +122,12 @@
     </div>
   </nav>
 
+{%block content%}
   <div class="container">
     <form class="form-inline" name = "idForm" action="{% url 'iTunesReviews:progressPage' %}" onsubmit="return validateForm()" method="post">
       {% csrf_token %}
       <div class="form-group" id="search">
-        <label for="your_name">iTunes ID </label>
+        <label for="your_name">Enter iTunes ID </label>
         <input id="searchBox" class="form-control" min="100000000" max="9999999999" name="id" value="{{Ident}}">
         <input id="searchButton" class="btn btn-default" type="submit" value="Collect Reviews and Download">
         <p id="errors"></p>
@@ -166,4 +173,6 @@
 
     </form>
   </div>
+  {% endblock %}
+
 </body>
