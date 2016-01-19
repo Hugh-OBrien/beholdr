@@ -1,6 +1,6 @@
 import sys
 from .models import ReviewReport
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django import forms
@@ -57,8 +57,11 @@ def main(request,ID = ""):
 
 
 def progressPage(request):
-    idnumber = request.POST['id']
-    countryList = request.POST.getlist('countryList[]')
+    try:
+        idnumber = request.POST['id']
+        countryList = request.POST.getlist('countryList[]')
+    except:
+        return redirect("../iTunesReviews")
     try:
         seshId = (request.POST['seshId'])
     #Generate session id
