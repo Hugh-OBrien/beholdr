@@ -68,47 +68,50 @@ def progressPage(request):
     except:
         random.seed()
         seshId = str(random.randrange(10001, 20000, 1))
-        print >>sys.stderr, seshId
+        #print >>sys.stderr, seshId
+    try:
+        if(len(countryList) >0):
+            if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):        
+                #get the next 4 countries
+                workingCountryList=[]
+                for x in range(0, 1):
+                    try:
+                        workingCountryList.append(countryList[0])
+                        countryList.pop(0)
+                    except:
+                        break
 
-    if(len(countryList) >0):
-        if(int(idnumber) < 10000000000 and int(idnumber) >= 100000000):        
-            #get the next 4 countries
-            workingCountryList=[]
-            for x in range(0, 1):
-                try:
-                    workingCountryList.append(countryList[0])
-                    countryList.pop(0)
-                except:
-                    break
-            runReport(idnumber, workingCountryList, seshId)
-
-            template = loader.get_template('itunesreviews/progress.html')
-            context = RequestContext(request, {'country_list':countryList, 'Ident':idnumber,
-                                               'seshId':seshId,})
-            return HttpResponse(template.render(context))
-
-    else:
-        #now we're going to returnt he actual report and delete the internal records
-        rep= ReviewReport.objects.get(name=seshId)
-
-        newPath = path.abspath(path.dirname(__file__))
-        chdir(newPath)
-
-        returnBook = load_workbook(rep.book)
-        returnBook = save_virtual_workbook(returnBook)
-
-        #delete the actual file
-        newPath = path.abspath(path.dirname(__file__))
-        chdir(newPath)
-        remove(rep.book)
-
-        #delete database entry
-        rep.delete()
-
-        #return as attachment
-        response = HttpResponse(returnBook ,content_type='application/vnd.ms-excel')
-        response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
-        return response
+                runReport(idnumber, workingCountryList, seshId)
+                        
+                template = loader.get_template('itunesreviews/progress.html')
+                context = RequestContext(request, {'country_list':countryList, 'Ident':idnumber,
+                                                           'seshId':seshId,})
+                return HttpResponse(template.render(context))
+                        
+        else:
+            #now we're going to returnt he actual report and delete the internal records
+            rep= ReviewReport.objects.get(name=seshId)
+            
+            newPath = path.abspath(path.dirname(__file__))
+            chdir(newPath)
+            
+            returnBook = load_workbook(rep.book)
+            returnBook = save_virtual_workbook(returnBook)
+            
+            #delete the actual file
+            newPath = path.abspath(path.dirname(__file__))
+            chdir(newPath)
+            remove(rep.book)
+            
+            #delete database entry
+            rep.delete()
+            
+            #return as attachment
+            response = HttpResponse(returnBook ,content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="iTunesReviews.xls"'
+            return response
+    except:
+        return redirect("../iTunesReviews")
 
 def runReport(idnumber, countryList, sessionId):
         
