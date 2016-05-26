@@ -1,8 +1,0 @@
-from dajax.core import Dajax
-
-def getNextCountry(request, country_list, ){
-
-        dajax = Dajax()
-
-        return dajax.json()
-}
