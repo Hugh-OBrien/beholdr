@@ -4,3 +4,4 @@ venv
 *.pyc
 staticfiles
 *get-pip.py
+*.xls
