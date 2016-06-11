@@ -19,7 +19,10 @@ from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
-    url(r'^iTunesReviews/', include('iTunesReviews.urls', namespace ="iTunesReviews")),
+    url(r'^iTunesReviews/', include('iTunesReviews.urls', \
+                                    namespace ="iTunesReviews")),
+    url(r'^simplecast/', include('simple_cast.urls', \
+                                    namespace ="simple_cast")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home', include('home.urls', namespace="home")),
     url(r'^.*$', RedirectView.as_view(url='../home', permanent=False), name='home'),
