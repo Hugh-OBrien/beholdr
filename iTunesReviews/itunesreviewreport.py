@@ -17,7 +17,7 @@ class review:
 class country:
     #class to hold all the data from one country
     def __init__(self, code, name, reviewList, iTunesID):
-        self.code = code
+        self.code = code 
         self.name = name.split('\n')[0]
         self.reviews = reviewList
         self.iTunesID = iTunesID
